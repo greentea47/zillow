@@ -12,7 +12,7 @@ def clean(text):
 
 
 def get_headers():
-    # Creating headers.
+   
     headers = {'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                'accept-encoding': 'gzip, deflate, sdch, br',
                'accept-language': 'en-GB,en;q=0.8,en-US;q=0.6,ml;q=0.4',
@@ -23,7 +23,7 @@ def get_headers():
 
 
 def create_url(zipcode, filter):
-    # Creating Zillow URL based on the filter.
+    
 
     if filter == "newest":
         url = "https://www.zillow.com/homes/for_sale/{0}/0_singlestory/days_sort".format(zipcode)
@@ -36,14 +36,14 @@ def create_url(zipcode, filter):
 
 
 def save_to_file(response):
-    # saving response to `response.html`
+    
 
     with open("response.html", 'w') as fp:
         fp.write(response.text)
 
 
 def write_data_to_csv(data):
-    # saving scraped data to csv.
+    
 
     with open("properties-%s.csv" % (zipcode), 'wb') as csvfile:
         fieldnames = ['title', 'address', 'city', 'state', 'postal_code', 'price', 'facts and features', 'real estate provider', 'url']
@@ -54,7 +54,7 @@ def write_data_to_csv(data):
 
 
 def get_response(url):
-    # Getting response from zillow.com.
+    
 
     for i in range(5):
         response = requests.get(url, headers=get_headers())
@@ -69,7 +69,7 @@ def get_response(url):
     return None
 
 def get_data_from_json(raw_json_data):
-    # getting data from json (type 2 of their A/B testing page)
+    
 
     cleaned_data = clean(raw_json_data).replace('<!--', "").replace("-->", "")
     properties_list = []
